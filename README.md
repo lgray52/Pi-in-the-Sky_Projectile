@@ -21,3 +21,4 @@ I still have some different ideas about how different aspects of the project wil
 
 <b> Problems and Solutions Brainstorming </b>
 
+<img src="images/problems_brainstorm.PNG" height="400">
