@@ -22,3 +22,28 @@ I still have some different ideas about how different aspects of the project wil
 <b> Problems and Solutions Brainstorming </b>
 
 <img src="images/problems_brainstorm.PNG" height="400">
+
+<b> Safety </b>
+
+The projectile will experience high impact speeds, so it's important it doesn't smash into a million pieces on impact. In order to ensure this, controlled tests will be conducted by dropping/throwing it from heights and making sure the shell is thick enough not to break. The use of squishy material will also help this. The rest of the safety concerns are all trebuchet launch related - people will need to stand away from the swinging arm. 
+
+<b> Materials </b>
+
+I expect this project will require:
+
+* Raspberry Pi Pico (1x)
+* Altimeter (x1)
+* Gyroscope (x1)
+* 3D-printer material (enough for a 6.86cm diameter sphere of probably about 2.5mm thickness)
+* Screws for putting the shell together
+* Custom soldered circuit boards to mount electronics on
+
+<b> Schedule </b>
+
+* Deadline: April 1
+  * CAD done by end of January
+  * Code done by middle of February
+  * All prints and circuit boards done by end of 1st week of March
+  * Assembly and durability testing throughout March
+  * Finished by April 1
+* Iteration and fixes
