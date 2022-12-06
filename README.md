@@ -23,6 +23,11 @@ I still have some different ideas about how different aspects of the project wil
 
 <img src="images/problems_brainstorm.PNG" height="400">
 
+
+<b> Code Block Diagram </b>
+
+<img src="images/code_diagram.PNG" height="400">
+
 <b> Safety </b>
 
 The projectile will experience high impact speeds, so it's important it doesn't smash into a million pieces on impact. In order to ensure this, controlled tests will be conducted by dropping/throwing it from heights and making sure the shell is thick enough not to break. The use of squishy material will also help this. The rest of the safety concerns are all trebuchet launch related - people will need to stand away from the swinging arm. 
