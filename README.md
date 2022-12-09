@@ -3,9 +3,9 @@ Lucy Gray Pi in the Sky Project Engineering 4
 
 
 ## Table of Contents
-* [Planning](https://github.com/lgray52/Pi-in-the-Sky_Projectile#planning)
-* [CAD](https://github.com/lgray52/Pi-in-the-Sky_Projectile#cad)
-* [Code](https://github.com/lgray52/Pi-in-the-Sky_Projectile#code)
+* [Planning](https://github.com/lgray52/Pi-in-the-Sky_Projectile/blob/main/README.md#planning)
+* [CAD](https://github.com/lgray52/Pi-in-the-Sky_Projectile/blob/main/README.md#cad)
+* [Code](https://github.com/lgray52/Pi-in-the-Sky_Projectile/blob/main/README.md#code)
 
 ### Planning
 
