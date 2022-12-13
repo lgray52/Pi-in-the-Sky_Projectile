@@ -4,7 +4,7 @@ import adafruit_mpu6050 as imu
 import busio
 import board
 import adafruit_mpl3115a2
-from projectileLib import findMax
+from code.projectileLib import findMax
 
 sdaPin = board.GP2  # define which SDA & SCL pins to use - HAVE TO BE CONNECTED TO SAME I2C ON PICO
 sclPin = board.GP3
