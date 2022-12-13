@@ -61,6 +61,6 @@ The primary challenge is to fit all of the electrical components into a sphere t
 
 <b> CAD Design </b>
 
- <img src="images/cad2.png" height="300"> <img src="images/cad3.png" height="300"> <img src="images/cad4.png" height="300">
+<img src="images/cad1.png" height="300"> <img src="images/cad2.png" height="300"> <img src="images/cad3.png" height="300"> <img src="images/cad4.png" height="300">
 
 ## Code
