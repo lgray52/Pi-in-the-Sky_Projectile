@@ -18,9 +18,10 @@ groundLevel = altimeter.altitude  # alimeter measures from sea level - set intia
 
 altitudes = []
 
-while True:
+while # something:
     accelerationVals = mpu.acceleration
     angularVals = mpu.gyro
     alt = (altimeter.altitude - groundLevel)  # pull the current altitude above ground level
 
-    altitudes.append(alt)
+
+altitudes.append(alt)
