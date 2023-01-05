@@ -64,3 +64,7 @@ The primary challenge is to fit all of the electrical components into a sphere t
 <img src="images/cad1.png" height="300"> <img src="images/cad2.png" height="300"> <img src="images/cad3.png" height="300"> <img src="images/cad4.png" height="300">
 
 ## Code
+
+### Starting the code
+
+The first big issue I had to address 
