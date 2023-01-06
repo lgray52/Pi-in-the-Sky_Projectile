@@ -3,24 +3,13 @@
 
 import busio
 import board
-from time import monotonic, sleep
+from time import sleep
 
 uart = busio.UART(board.GP0, board.GP1, baudrate=9600, timeout=0)
-
-interval = 3.0  # send a message every 2 seconds
-timeLastSent = 0  # variable to store the last time a message was sent
 
 messageStarted = False  # wait for a message to start
 
 while True:
-    now = monotonic()
-
-    if now - timeLastSent >= interval:  # if its been 3 seconds or more since a message last sent, send a message
-        uart.write(bytes(f"<check>", "ascii"))
-        print(f"Sending message ...")
-        timeLastSent = now  # set last message sent time to current time
-    
-
     byte_read = uart.read(1)  # Read one byte over UART lines
 
     if not byte_read:
@@ -44,3 +33,11 @@ while True:
         else:
             # Accumulate message byte by byte - this strings the message together.
             message.append(chr(byte_read[0]))
+    
+    if messageNice == "Start":
+        # Start data collection sequence
+        print("Starting data collection ...")
+
+    if messageNice == "Stop":
+        # Stop collecting data
+        print("Ending data collection")

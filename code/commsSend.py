@@ -3,22 +3,30 @@
 
 import busio
 import board
-from time import monotonic, sleep
+from time import sleep
+import digitalio
 
 uart = busio.UART(board.GP0, board.GP1, baudrate=9600, timeout=0)
 
-interval = 3.0  # send a message every 2 seconds
-timeLastSent = 0  # variable to store the last time a message was sent
+button = digitalio.DigitalInOut(board.GP15)
+button.pull = digitalio.Pull.UP  # wire one leg to pin 15 ad the other to GROUND)
 
 messageStarted = False  # wait for a message to start
+alreadyPressed = False
 
 while True:
-    now = monotonic()
-
-    if now - timeLastSent >= interval:  # if its been 3 seconds or more since a message last sent, send a message
-        uart.write(bytes(f"<check>", "ascii"))
-        print(f"Sending message ...")
-        timeLastSent = now  # set last message sent time to current time
+    if button.value == False:  # if its been 3 seconds or more since a message last sent, send a message
+        if alreadyPressed == False:
+            uart.write(bytes(f"<Start>", "ascii"))
+            print(f"Starting data collection ...")
+            sleep(1)
+            alreadyPressed = True
+        
+        if alreadyPressed == True:
+            uart.write(bytes(f"<Stop>", "ascii"))
+            print(f"Stopping data collection ...")
+            sleep(1)
+            alreadyPressed = False
     
 
     byte_read = uart.read(1)  # Read one byte over UART lines
