@@ -13,10 +13,10 @@ timeLastSent = 0  # variable to store the last time a message was sent
 messageStarted = False  # wait for a message to start
 
 while True:
-    now = monotonic()
+    now = monotonic()  # set current time
 
     if now - timeLastSent >= interval:  # if its been 3 seconds or more since a message last sent, send a message
-        uart.write(bytes(f"<check>", "ascii"))
+        uart.write(bytes(f"<check>", "ascii"))  # needs the "ascii" to work, bytes() needs two arguments
         print(f"Sending message ...")
         timeLastSent = now  # set last message sent time to current time
     
@@ -30,7 +30,7 @@ while True:
     if byte_read == b"<":
         # Start of message. Start accumulating bytes, but don't record the "<".
         message = []
-        messageStarted = True
+        messageStarted = True  # its true that the message has started - initate next loop
         continue
 
     if messageStarted:
@@ -39,7 +39,7 @@ while True:
             # Now we have a complete message. Convert it to a string.
             messageNice = "".join(message)  # join letters together into a nicer format
             print(f"Message received: {messageNice}")
-            messageStarted = False
+            messageStarted = False  # finish the message
     
         else:
             # Accumulate message byte by byte - this strings the message together.
