@@ -1,28 +1,23 @@
-from statistics import mean, stdev
+# from statistics import mean, stdev
 
-def findMax(vals):
-    meanVal = mean(vals)
-    deviation = stdev(vals)
+# def findMax(vals):
+#     meanVal = mean(vals)
+#     deviation = stdev(vals)
 
-    for i in vals:  # remove noise from data
-        zScore = (vals[i]-meanVal)/deviation
+#     for i in vals:  # remove noise from data
+#         zScore = (vals[i]-meanVal)/deviation
 
-        if zScore > 3:  # remove outliers more than 3 standard deviations from mean
-            del vals[i]
+#         if zScore > 3:  # remove outliers more than 3 standard deviations from mean
+#             del vals[i]
 
-    maxVal = max(vals)
+#     maxVal = max(vals)
 
-    return maxVal
+#     return maxVal
 
-import busio
-import board
+def getMessage(uart):
+    messageStarted = False  # wait for a message to start
+    messageNice = 0
 
-uart = busio.UART(board.GP0, board.GP1, baudrate=9600, timeout=0)
-
-messageStarted = False  # wait for a message to start
-messageNice = 0
-
-def getMessage():
     byte_read = uart.read(1)  # Read one byte over UART lines
 
     if not byte_read:
@@ -35,7 +30,7 @@ def getMessage():
         messageStarted = True
         pass
 
-    if messageStarted:
+    if messageStarted == True:
         if byte_read == b">":
             # End of message. Don't record the ">".
             # Now we have a complete message. Convert it to a string.
