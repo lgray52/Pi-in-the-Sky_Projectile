@@ -2,7 +2,7 @@
 # code from https://learn.adafruit.com/uart-communication-between-two-circuitpython-boards/code
 
 
-from code.projectileLib import findMax, getMessage
+from projectileLib import getMessage
 
 while True:
     messageNice = getMessage()

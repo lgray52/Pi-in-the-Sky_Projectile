@@ -1,3 +1,4 @@
+# type: ignore
 # communicate over uart between boards
 # code from https://learn.adafruit.com/uart-communication-between-two-circuitpython-boards/code
 
@@ -5,7 +6,7 @@ import busio
 import board
 from time import sleep
 import digitalio
-from code.projectileLib import findMax, getMessage
+from projectileLib import getMessage
 
 uart = busio.UART(board.GP0, board.GP1, baudrate=9600, timeout=0)
 
@@ -23,11 +24,10 @@ while True:
             sleep(1)
             alreadyPressed = True
         
-        if alreadyPressed == True:
+        elif alreadyPressed == True:
             uart.write(bytes(f"<Stop>", "ascii"))
             print(f"Stopping data collection ...")
             sleep(1)
             alreadyPressed = False
-    
 
-    messageNice = getMessage()
+    messageNice = getMessage(uart)
