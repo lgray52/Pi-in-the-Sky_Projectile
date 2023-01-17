@@ -1,45 +1,35 @@
-# from statistics import mean, stdev
+from ulab import numpy as np
 
-# def findMax(vals):
-#     meanVal = mean(vals)
-#     deviation = stdev(vals)
+def findMax(vals):
+    meanVal = np.mean(vals)
+    deviation = np.std(vals)
 
-#     for i in vals:  # remove noise from data
-#         zScore = (vals[i]-meanVal)/deviation
+    for i in range(len(vals)):  # remove noise from data
+        print(vals)
+        zScore = (vals[i]-meanVal)/deviation
 
-#         if zScore > 3:  # remove outliers more than 3 standard deviations from mean
-#             del vals[i]
+        if zScore > 3:  # remove outliers more than 3 standard deviations from mean
+            vals.remove(vals[i])
 
-#     maxVal = max(vals)
+    maxVal = max(vals)
 
-#     return maxVal
+    return maxVal
+
+from time import sleep
 
 def getMessage(uart):
-    messageStarted = False  # wait for a message to start
-    messageNice = 0
+    message = 0
 
-    byte_read = uart.read(1)  # Read one byte over UART lines
+    byte_read = uart.read(30)  # Read a bunch of bytes to make sure it gets the whole message
+    sleep(.1)  # make sure it has enough tine to read the whole message while not causing awkward delay
 
     if not byte_read:
         # Nothing read.
         pass
 
-    if byte_read == b"<":
-        # Start of message. Start accumulating bytes, but don't record the "<".
-        message = []
-        messageStarted = True
-        pass
-
-    if messageStarted == True:
-        if byte_read == b">":
-            # End of message. Don't record the ">".
-            # Now we have a complete message. Convert it to a string.
-            messageNice = "".join(message)  # join letters together into a nicer format
-            print(f"Message received: {messageNice}")
-            messageStarted = False
+    if byte_read:
+        message = byte_read.decode()
+        # print(message)
+        print(f"Message received: {message}")
     
-        else:
-            # Accumulate message byte by byte - this strings the message together.
-            message.append(chr(byte_read[0]))
-    
-    return messageNice
+    return message
