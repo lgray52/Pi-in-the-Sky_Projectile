@@ -4,7 +4,7 @@ def findMax(vals):
     meanVal = np.mean(vals)
     deviation = np.std(vals)
 
-    for i in range(len(vals)):  # remove noise from data
+    for i in reversed(range(len(vals))):  # remove noise from data
         print(vals)
         zScore = (vals[i]-meanVal)/deviation
 
