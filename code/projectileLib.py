@@ -1,17 +1,30 @@
+# type: ignore
+
 from ulab import numpy as np
 
 def findMax(vals):
-    meanVal = np.mean(vals)
-    deviation = np.std(vals)
+    real_vals = []
+    medianVal = np.median(vals)
+    # print("MEDIAN:", medianVal)
+    devs = []
+
+    for d in range(len(vals)):  # make a list of all the deviations from the mean
+        devs.append(vals[d] - medianVal)
+    
+    deviation = np.sqrt((sum(devs))/len(vals))  # add them up and find the standard deviation
+    # print("DEVIATION:", deviation)
 
     for i in reversed(range(len(vals))):  # remove noise from data
-        print(vals)
-        zScore = (vals[i]-meanVal)/deviation
+        # print(vals)
+        zScore = (vals[i]-medianVal)/deviation
+        # print(vals[i])
+        # print("z-score:", zScore)
 
-        if zScore > 3:  # remove outliers more than 3 standard deviations from mean
-            vals.remove(vals[i])
+        if zScore <= 3:  # add all close enough vals to real vals list, excluding outliers > 3 stdevs from the mean
+            real_vals.append(vals[i])
+            # print(real_vals)
 
-    maxVal = max(vals)
+    maxVal = max(real_vals)
 
     return maxVal
 
@@ -28,8 +41,8 @@ def getMessage(uart):
         pass
 
     if byte_read:
-        message = byte_read.decode()
+        message = byte_read.decode()  # decode bytes into a string
         # print(message)
-        print(f"Message received: {message}")
+        print(f"Message received: {message}") 
     
     return message
