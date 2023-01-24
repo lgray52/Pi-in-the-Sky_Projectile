@@ -72,4 +72,33 @@ The first big issue I had to address was starting the data collection sequence o
 
 ### Adapting reading message into library
 
-One issue I had with the code above is that, while functional, the section which is able to retrieve a message is long and a little bit clunky since it's reading the message one byte at a time and stringing it together letter by letter. I decided to put it into a function so I could use it repeatedly, bunt unfortunately the stringing the message together relies on a loop. A loop inside a function is a slippery slope to figure out since its easy to accidentally get stuck inside a loop within a function, so I decided to try a different approach by reading more bytes over the line. I found the very handy decode() method which turns bytes into a string which is the ideal output, allowing me to simplify the message-getting approach significantly. 
+One issue I had with the code above is that, while functional, the section which is able to retrieve a message is long and a little bit clunky since it's reading the message one byte at a time and stringing it together letter by letter. The purpose of doing this in the original code is to designate responses by the message type based on a one-letter key at the beginning of a message, a functionality which is not needed in my code. I decided to put it the message-reading section a function so I could use it repeatedly, but unfortunately the stringing the message together relies on a loop. A loop inside a function is a slippery slope to figure out since its easy to accidentally get stuck inside a loop within a function, so I decided to try a different approach by reading more bytes over the line. I found the very handy decode() method which turns bytes into a string which is the ideal output, allowing me to simplify the message-getting approach significantly. 
+
+
+### Finding the maximum height values and eliminating outliers in the data
+
+Since I am going to need to be able to find a reliable measurement of maximum height, I decided I needed to write a short function to separate out outliers since the data from the altitude sensor is prone to random spikes. CircuitPython makes it very easy to find a maximum value with the max() method, so I just had to figure out how to reove outliers using statistics with the very handy ulab/"micro lab" (which allows many features of numpy, a very very useful library for anything beyond basic math, to work in CircuitPython). I tried this using mean first, but big outliers skewed the mean significantly and threw the maximum data point off, so I switched over to median. Below is the completed function. 
+
+``` python
+from ulab import numpy as np
+
+def findMax(vals):
+    real_vals = []
+    medianVal = np.median(vals)
+    devs = []
+
+    for d in range(len(vals)):  # make a list of all the deviations from the median (mean ends up too skewed)
+        devs.append(vals[d] - medianVal)
+    
+    deviation = np.sqrt((sum(devs))/len(vals))  # add them up and find the standard deviation
+
+    for i in reversed(range(len(vals))):  # cycle backward through list so as not to mess up indices
+        zScore = (vals[i]-medianVal)/deviation  # find the z-score (how far removed from the data it is) based on median
+
+        if zScore <= 3:  # add all close enough vals to real vals list, excluding outliers > 3 stdevs from the median
+            real_vals.append(vals[i])
+
+    maxVal = max(real_vals)
+    
+    return maxVal
+```
