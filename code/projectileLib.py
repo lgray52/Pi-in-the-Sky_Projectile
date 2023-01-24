@@ -8,19 +8,19 @@ def findMax(vals):
     # print("MEDIAN:", medianVal)
     devs = []
 
-    for d in range(len(vals)):  # make a list of all the deviations from the mean
+    for d in range(len(vals)):  # make a list of all the deviations from the median (mean ends up too skewed)
         devs.append(vals[d] - medianVal)
     
     deviation = np.sqrt((sum(devs))/len(vals))  # add them up and find the standard deviation
     # print("DEVIATION:", deviation)
 
-    for i in reversed(range(len(vals))):  # remove noise from data
+    for i in reversed(range(len(vals))): # cycle backward through list so as not to mess up indices
         # print(vals)
-        zScore = (vals[i]-medianVal)/deviation
+        zScore = (vals[i]-medianVal)/deviation # find the z-score (how far removed from the data it is) based on median
         # print(vals[i])
         # print("z-score:", zScore)
 
-        if zScore <= 3:  # add all close enough vals to real vals list, excluding outliers > 3 stdevs from the mean
+        if zScore <= 3:  # # add all close enough vals to real vals list, excluding outliers > 3 stdevs from the median
             real_vals.append(vals[i])
             # print(real_vals)
 
