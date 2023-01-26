@@ -34,5 +34,5 @@ while True:
 
     if message == "Sending max height...":
         sleep(.1)
-        maxHeight = getMessage(uart)\
+        maxHeight = getMessage(uart)
         print(f"Max height: {maxHeight}m")
