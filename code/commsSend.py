@@ -14,7 +14,7 @@ button = digitalio.DigitalInOut(board.GP15)
 button.pull = digitalio.Pull.UP  # wire one leg to pin 15 ad the other to GROUND)
 
 messageStarted = False  # wait for a message to start
-alreadyPressed = False
+alreadyPressed = False  # wait for button to be pressed
 
 while True:
     if button.value == False:  # if its been 3 seconds or more since a message last sent, send a message
