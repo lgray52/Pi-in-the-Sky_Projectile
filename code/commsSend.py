@@ -2,23 +2,36 @@
 # communicate over uart between boards
 # code from https://learn.adafruit.com/uart-communication-between-two-circuitpython-boards/code
 
+'''uart setup'''
 import busio
 import board
-from time import sleep
-import digitalio
-from projectileLib import getMessage
-
 uart = busio.UART(board.GP0, board.GP1, baudrate=9600, timeout=0)
 
+
+'''button setup'''
+import digitalio
 button = digitalio.DigitalInOut(board.GP15)
 button.pull = digitalio.Pull.UP  # wire one leg to pin 15 ad the other to GROUND)
+
+'''oled screen setup'''
+from adafruit_display_text import label
+import adafruit_displayio_ssd1306
+from terminalio import FONT
+import displayio
+displayio.release_displays()
+display_bus = displayio.I2CDisplay(i2c, device_address = 0x3d, reset = board.GP5)  # set up oled screen - device address from test code
+display = adafruit_displayio_ssd1306.SSD1306(display_bus, width=128, height=64)
+
+'''general'''
+from time import sleep
+from projectileLib import getMessage
 
 messageStarted = False  # wait for a message to start
 alreadyPressed = False  # wait for button to be pressed
 
 while True:
-    if button.value == False:  # if its been 3 seconds or more since a message last sent, send a message
-        if alreadyPressed == False:
+    if button.value == False:  # if the button is pressed, send a message
+        if alreadyPressed == False:  #
             uart.write(bytes(f"<Start>", "ascii"))
             print(f"Starting data collection ...")
             sleep(1)
@@ -34,5 +47,12 @@ while True:
 
     if message == "Sending max height...":
         sleep(.1)
-        maxHeight = getMessage(uart)
-        print(f"Max height: {maxHeight}m")
+        maxHeight = getMessage(uart)  # max height will send immediately after words - this is a little bit guess and check rn
+        maxStr = f"Max height: {maxHeight}m"  # set as var to pass to serial and the oled screen
+        print(maxStr)
+
+        # print to oled screen
+        maxLine = label.Label(FONT, text = maxStr, color = 0xFFFF00, x = 5, y = 5)  # format title line; set text to start at screen coordinate (5,5)
+        splash.append(maxLine)  # add maximum value to what the screen is showing
+
+        display.show(splash)  # print to screen
