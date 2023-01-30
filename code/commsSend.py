@@ -19,6 +19,9 @@ import adafruit_displayio_ssd1306
 from terminalio import FONT
 import displayio
 displayio.release_displays()
+sdaPin = board.GP2  # define which SDA & SCL pins to use - HAVE TO BE CONNECTED TO SAME I2C ON PICO
+sclPin = board.GP3
+i2c = busio.I2C(sclPin, sdaPin)
 display_bus = displayio.I2CDisplay(i2c, device_address = 0x3d, reset = board.GP5)  # set up oled screen - device address from test code
 display = adafruit_displayio_ssd1306.SSD1306(display_bus, width=128, height=64)
 
