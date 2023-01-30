@@ -23,22 +23,25 @@ groundLevel = altimeter.altitude  # alimeter measures from sea level - set intia
 
 while True:
     message = getMessage(uart)
+    print(message)
     
     if message == "Start":
         alts = []
         # Start data collection sequence
         print("Starting data collection ...")
 
-        while message == "Start": 
+        while message == "Start" or message == 0: 
+            message = getMessage(uart)  # check constantly for message?
+            print(message)
             alt = altimeter.altitude  # pull the current altitude
             abvG = alt - groundLevel  # above ground height is the difference between altitude and ground level
-
             alts.append(abvG)  # accumulate a list of all the altitudes recorded by the altimeter
 
     
     if message == "Stop":
         # Stop collecting data
         print("Ending data collection")
+        print(alts)
         altsFinal = np.array(alts)  # make altitudes into a numpy array so it can be used
         max = findMax(altsFinal)  # take maxmimum value and print
         print(f"Max height: {max}")
