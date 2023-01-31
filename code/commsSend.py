@@ -35,13 +35,13 @@ alreadyPressed = False  # wait for button to be pressed
 while True:
     if button.value == False:  # if the button is pressed, send a message
         if alreadyPressed == False:  #
-            uart.write(bytes(f"<Start>", "ascii"))
+            uart.write(bytes(f"Start", "ascii"))
             print(f"Starting data collection ...")
             sleep(1)
             alreadyPressed = True
         
         elif alreadyPressed == True:
-            uart.write(bytes(f"<Stop>", "ascii"))
+            uart.write(bytes(f"Stop", "ascii"))
             print(f"Stopping data collection ...")
             sleep(1)
             alreadyPressed = False
