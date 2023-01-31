@@ -6,6 +6,7 @@ import busio
 import board
 from ulab import numpy as np
 import adafruit_mpl3115a2
+from time import sleep
 
 uart = busio.UART(board.GP0, board.GP1, baudrate=9600, timeout=0)
 
@@ -23,7 +24,7 @@ groundLevel = altimeter.altitude  # alimeter measures from sea level - set intia
 
 while True:
     message = getMessage(uart)
-    print(message)
+    # print(message)
     
     if message == "Start":
         alts = []
@@ -32,7 +33,7 @@ while True:
 
         while message == "Start" or message == 0: 
             message = getMessage(uart)  # check constantly for message?
-            print(message)
+            # print(message)
             alt = altimeter.altitude  # pull the current altitude
             abvG = alt - groundLevel  # above ground height is the difference between altitude and ground level
             alts.append(abvG)  # accumulate a list of all the altitudes recorded by the altimeter
@@ -47,4 +48,7 @@ while True:
         print(f"Max height: {max}")
 
         uart.write(bytes(f"Sending max height...", "ascii"))
-        uart.write(bytes(f"{str(max)}", "ascii"))
+        message = getMessage(uart)
+
+        if message == "Ready for max height":
+            uart.write(bytes(f"{str(max)}", "ascii"))

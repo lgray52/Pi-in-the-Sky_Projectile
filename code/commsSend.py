@@ -49,13 +49,20 @@ while True:
     message = getMessage(uart)
 
     if message == "Sending max height...":
-        sleep(.1)
-        maxHeight = getMessage(uart)  # max height will send immediately after words - this is a little bit guess and check rn
-        maxStr = f"Max height: {maxHeight}m"  # set as var to pass to serial and the oled screen
-        print(maxStr)
+        waitForMax = True
 
-        # print to oled screen
-        maxLine = label.Label(FONT, text = maxStr, color = 0xFFFF00, x = 5, y = 5)  # format title line; set text to start at screen coordinate (5,5)
-        splash.append(maxLine)  # add maximum value to what the screen is showing
+    if waitForMax:
+        uart.write(bytes(f"Ready for max height", "ascii"))
+        waitForMax = False
 
-        display.show(splash)  # print to screen
+
+        # sleep(.1)
+        # maxHeight = getMessage(uart)  # max height will send immediately after words - this is a little bit guess and check rn
+        # maxStr = f"Max height: {maxHeight}m"  # set as var to pass to serial and the oled screen
+        # print(maxStr)
+
+        # # print to oled screen
+        # maxLine = label.Label(FONT, text = maxStr, color = 0xFFFF00, x = 5, y = 5)  # format title line; set text to start at screen coordinate (5,5)
+        # splash.append(maxLine)  # add maximum value to what the screen is showing
+
+        # display.show(splash)  # print to screen
