@@ -1,6 +1,5 @@
 # type: ignore
 # communicate over uart between boards
-# code from https://learn.adafruit.com/uart-communication-between-two-circuitpython-boards/code
 
 '''uart setup'''
 import busio
@@ -33,6 +32,8 @@ messageStarted = False  # wait for a message to start
 alreadyPressed = False  # wait for button to be pressed
 
 while True:
+    splash = displayio.Group()
+
     if button.value == False:  # if the button is pressed, send a message
         if alreadyPressed == False:  #
             uart.write(bytes(f"Start", "ascii"))
@@ -48,14 +49,22 @@ while True:
 
     message = getMessage(uart)
 
-    if message == "Sending max height...":
+    if message == "Sending max height...":  # wait for message which tells sender to prepare to receieve max height
         waitForMax = True
+    else:
+        waitForMax = False
 
-    if waitForMax:
+    if waitForMax:  # tell receiever the sender is ready
         uart.write(bytes(f"Ready for max height", "ascii"))
         waitForMax = False
 
-        maxHeight = getMessage(uart)  # max height will send immediately after words - this is a little bit guess and check rn
+        byte_read = uart.read(1)
+
+        while byte_read == None:  # read one byte at a time until it gets a message which isn't None
+            byte_read = uart.read(1)
+            # print(byte_read)
+    
+        maxHeight = getMessage(uart)  # read the message after the first detected byte
         maxStr = f"Max height: {maxHeight}m"  # set as var to pass to serial and the oled screen
         print(maxStr)
 

@@ -47,12 +47,11 @@ while True:
         max = findMax(altsFinal)  # take maxmimum value and print
         print(f"Max height: {max}")
 
-        sleep(.1)
-        uart.write(bytes(f"Sending max height...", "ascii"))
+        uart.write(bytes(f"Sending max height...", "ascii"))  # send sender a message to prepare to receive max height
         message = getMessage(uart)
 
-        while message == 0:
-            message = getMessage(uart)
+        while message == 0:  # wait until message is sent back over that sender is ready to receive
+            message = getMessage(uart)  # continue to check message
 
-        if message == "Ready for max height":
-            uart.write(bytes(f"{str(max)}", "ascii"))
+        if message == "Ready for max height":  # when confirmation is received, send max height
+            uart.write(bytes(f" {str(max)}", "ascii"))  # need to add one space before message so that it can read that a byte is sent before getting the whole message
