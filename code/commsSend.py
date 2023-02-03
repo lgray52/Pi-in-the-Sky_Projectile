@@ -47,9 +47,7 @@ while True:
             sleep(1)
             alreadyPressed = False
 
-    message = getMessage(uart)
-
-    if message == "Sending max height...":  # wait for message which tells sender to prepare to receieve max height
+    if getMessage(uart) == "Sending max height...":  # wait for message which tells sender to prepare to receieve max height
         waitForMax = True
     else:
         waitForMax = False
@@ -63,8 +61,13 @@ while True:
         while byte_read == None:  # read one byte at a time until it gets a message which isn't None
             byte_read = uart.read(1)
             # print(byte_read)
-    
+
         maxHeight = getMessage(uart)  # read the message after the first detected byte
+
+        while maxHeight == 0:  # max height almost certainly should not be zero - correct transmission skip
+            maxHeight = getMessage(uart)
+            # print(maxHeight)
+
         maxStr = f"Max height: {maxHeight}m"  # set as var to pass to serial and the oled screen
         print(maxStr)
 
