@@ -46,3 +46,6 @@ def getMessage(uart):
         print(f"Message received: {message}") 
     
     return message
+
+def findMag(vals):  # find magnitude of a vector
+    return np.sqrt(sum(i**2 for i in vals))
