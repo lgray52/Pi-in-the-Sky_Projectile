@@ -16,13 +16,15 @@ launched = False
 
 while True:
     accel = findMag(mpu.acceleration)  # magnitude of acceleration
+    # print(accel)
 
     if abs(accel) < 1 and launched == False:
         launchTime = monotonic()
+        print(launchTime)
         launched = True
 
     if abs(accel) < 1 and launched == True:
         stopTime = monotonic()
-        totalTime = launchTime - stopTime
-        print(totalTime)
+        totalTime =  stopTime - launchTime
+        print(f"Total time of flight: {totalTime}")
         launched = False
