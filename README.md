@@ -55,6 +55,8 @@ I expect this project will require:
   * Finished by April 1
 * Iteration and fixes
 
+[Back to Table of Contents](https://github.com/lgray52/Pi-in-the-Sky_Projectile/blob/main/README.md#table-of-contents)
+
 ## CAD
 
 The primary challenge is to fit all of the electrical components into a sphere the size of a tennis ball and keep everything under the 181g weight limit while designing it to be structurally sound enough to survive repeated impacts. In the design process, I decided to make a dual-layer design with squishy TPU on the outside and rigid PLA on the inside. This way, the impact stress will be absorbed by the outer layer while the electronic components on the inside will not be squished or smashed against one another. To fit the circuit boards in, I created flat faces perdendicular to the direction the Pico will be suspended to allow all the components to fit in properly. There will also be room for a powerboost and internal padding.
@@ -62,6 +64,8 @@ The primary challenge is to fit all of the electrical components into a sphere t
 <b> CAD Design </b>
 
 <img src="images/cad1.png" height="300"> <img src="images/cad2.png" height="300"> <img src="images/cad3.png" height="300"> <img src="images/cad4.png" height="300">
+
+[Back to Table of Contents](https://github.com/lgray52/Pi-in-the-Sky_Projectile/blob/main/README.md#table-of-contents)
 
 ## Code
 *All code written in CircuitPython for Raspberry Pi Pico boards*
@@ -103,3 +107,85 @@ def findMax(vals):
     
     return maxVal
 ```
+
+### Passing the maximum value back to the control box
+
+This was unexpectedly very challenging, since I didn't have a system in place for catching a message at a specific moment in the code when it was sent. All of the previous messages I needed to send contained specific text that I was using as an activation key, whereas the maximum value is a number that will vary from launch to launch. This meant that I couldn't employ the tactic of just running a "while True" loop and looking for the message to be a specific sentence. Instead, I had an activation key send back and forth to ready both boards and then catch the message by reading bytes until the beginning of the message (a filler character) is detected, after which it catches the max height. This very nearly worked, but it seems that the UART spits over messages extremely quickly so almost 50% of the time the message it was catching was a zero. The solution I came up with is causing it to enter a while loop to keep looking for the real message if the message it gets is "0". I don't anticipate this will be a problem because if the measured max height is ever actually zero, I will have much bigger issues than transmitting max height. This works quite well and prints nicely to the screen. 
+
+<table>
+<tr>
+<th align="center">
+<img width="441" height="1px">
+<p> 
+<small>
+PROJECTILE CODE
+</small>
+</p>
+</th>
+<th align="center">
+<img width="441" height="1px">
+<p> 
+<small>
+CONTROL BOX CODE
+</small>
+</p>
+</th>
+</tr>
+<tr>
+<td>
+
+```python
+uart.write(bytes(f"Sending max height...", "ascii"))  
+# send sender a message to prepare to receive max height
+message = getMessage(uart)
+
+while message == 0:  
+# wait until message is sent back over that sender is ready to receive
+    message = getMessage(uart)  # continue to check message
+
+if message == "Ready for max height":  
+# when confirmation is received, send max height
+    uart.write(bytes(f" {str(max)}", "ascii"))  
+    # need to add one space before message so that it can read 
+    # that a byte is sent before getting the whole message
+```
+  
+</td>
+<td>
+  
+```python
+if getMessage(uart) == "Sending max height...":  
+# wait for message which tells sender to prepare to receieve max height
+    waitForMax = True
+else:
+    waitForMax = False
+
+if waitForMax:  # tell receiever the sender is ready
+    uart.write(bytes(f"Ready for max height", "ascii"))
+    waitForMax = False
+
+    byte_read = uart.read(1)
+
+    while byte_read == None:  
+        # read one byte at a time until it gets a message which isn't None
+        byte_read = uart.read(1)
+
+    maxHeight = getMessage(uart)  # read the message after the first detected byte
+
+    while maxHeight == 0:  
+        # max height almost certainly should not be zero - correct transmission skip
+        maxHeight = getMessage(uart)
+
+    maxStr = f"Max height: {maxHeight}m"  
+    # set as var to pass to serial and the oled screen
+```
+</td>
+</tr>
+</table>
+
+
+### Finding the time of flight
+
+Upon talking with Mr. Manning, I decided to include a timing function. My initial idea is to use time.monotonic() to measure the amount of time in a state of freefall between major accelerations. The MPU acceleromter I'm using is callibrated so that freefall constitutes an acceleration of zero, so if the projectile knows it has not been launched (has not experienced freefall) that it should be looking for when it enters freefall to tell when it is launched. Once it knows it has been launched, it should be looking for when it experiences an acceleration from hitting the ground, which will be larger than the normal force (about 9.8 $m/s^2$ but usually between 8 and 11 in the accelerometer's readings). This allows what seems to be a fairly accurate time of flight, but I will probably need to test this code headless since dropping my circuitboard from the table to a chair is not really far enough to see whether or not the time value is consistent. Proof of concept code [here](https://github.com/lgray52/Pi-in-the-Sky_Projectile/blob/main/code/accelTest.py).
+
+[Back to Table of Contents](https://github.com/lgray52/Pi-in-the-Sky_Projectile/blob/main/README.md#table-of-contents)
