@@ -179,5 +179,8 @@ if waitForMax:  # tell receiever the sender is ready
     maxStr = f"Max height: {maxHeight}m"  
     # set as var to pass to serial and the oled screen
 ```
-
-[Back to Table of Contents](https://github.com/lgray52/Pi-in-the-Sky_Projectile#table-of-contents)
+ </td>
+ </tr>
+ </table>
+ 
+ [Back to Table of Contents](https://github.com/lgray52/Pi-in-the-Sky_Projectile#table-of-contents)
