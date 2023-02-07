@@ -23,7 +23,7 @@ while True:
         print(launchTime)
         launched = True
 
-    if abs(accel) < 1 and launched == True:
+    if abs(accel) > 11 and launched == True:
         stopTime = monotonic()
         totalTime =  stopTime - launchTime
         print(f"Total time of flight: {totalTime}")
