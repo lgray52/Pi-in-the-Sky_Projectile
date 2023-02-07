@@ -179,12 +179,13 @@ if waitForMax:  # tell receiever the sender is ready
     maxStr = f"Max height: {maxHeight}m"  
     # set as var to pass to serial and the oled screen
 ```
- </td>
- </tr>
- </table>
- 
- 
- ### Finding the time of flight
- 
+</td>
+</tr>
+</table>
+
+
+### Finding the time of flight
+
+Upon talking with Mr. Manning, I decided to include a timing function. My initial idea is to use time.monotonic() to measure the amount of time in a state of freefall between major accelerations. The MPU acceleromter I'm using is callibrated so that freefall constitutes an acceleration of zero, so if the projectile knows it has not been launched (has not experienced freefall) that it should be looking for when it enters freefall to tell when it is launched. Once it knows it has been launched, it should be looking for when it experiences an acceleration from hitting the ground, which will be larger than the normal force (about 9.8 $m/s^2$ but usually between 8 and 11 in the accelerometer's readings). This allows what seems to be a fairly accurate time of flight, but I will probably need to test this code headless since dropping my circuitboard from the table to a chair is not really far enough to see whether or not the time value is consistent. 
 
 [Back to Table of Contents](https://github.com/lgray52/Pi-in-the-Sky_Projectile/blob/main/README.md#table-of-contents)
