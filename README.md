@@ -55,7 +55,7 @@ I expect this project will require:
   * Finished by April 1
 * Iteration and fixes
 
-[Back to Table of Contents](https://github.com/lgray52/Pi-in-the-Sky_Projectile#table-of-contents)
+[Back to Table of Contents](https://github.com/lgray52/Pi-in-the-Sky_Projectile/blob/main/README.md#table-of-contents)
 
 ## CAD
 
@@ -65,7 +65,7 @@ The primary challenge is to fit all of the electrical components into a sphere t
 
 <img src="images/cad1.png" height="300"> <img src="images/cad2.png" height="300"> <img src="images/cad3.png" height="300"> <img src="images/cad4.png" height="300">
 
-[Back to Table of Contents](https://github.com/lgray52/Pi-in-the-Sky_Projectile#table-of-contents)
+[Back to Table of Contents](https://github.com/lgray52/Pi-in-the-Sky_Projectile/blob/main/README.md#table-of-contents)
 
 ## Code
 *All code written in CircuitPython for Raspberry Pi Pico boards*
@@ -183,4 +183,4 @@ if waitForMax:  # tell receiever the sender is ready
  </tr>
  </table>
  
- [Back to Table of Contents](https://github.com/lgray52/Pi-in-the-Sky_Projectile#table-of-contents)
+[Back to Table of Contents](https://github.com/lgray52/Pi-in-the-Sky_Projectile/blob/main/README.md#table-of-contents)
