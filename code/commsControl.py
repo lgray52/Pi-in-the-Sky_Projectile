@@ -7,7 +7,7 @@ import board
 uart = busio.UART(board.GP0, board.GP1, baudrate=9600, timeout=0)
 
 
-'''button setup'''
+'''arming button setup'''
 import digitalio
 button = digitalio.DigitalInOut(board.GP15)
 button.pull = digitalio.Pull.UP  # wire one leg to pin 15 ad the other to GROUND)
@@ -24,12 +24,20 @@ i2c = busio.I2C(sclPin, sdaPin)
 display_bus = displayio.I2CDisplay(i2c, device_address = 0x3d, reset = board.GP5)  # set up oled screen - device address from test code
 display = adafruit_displayio_ssd1306.SSD1306(display_bus, width=128, height=64)
 
+'''timer setup'''
+import digitalio
+buttonT = digitalio.DigitalInOut(board.GP14)
+buttonT.pull = digitalio.Pull.UP  # wire one leg to pin 14 ad the other to GROUND)
+
+# set up OLED screen on a different i2c
+
 '''general'''
-from time import sleep
+from time import sleep, monotonic
 from projectileLib import getMessage
 
 messageStarted = False  # wait for a message to start
 alreadyPressed = False  # wait for button to be pressed
+timerStarted = False
 
 while True:
     splash = displayio.Group()
@@ -76,3 +84,8 @@ while True:
         splash.append(maxLine)  # add maximum value to what the screen is showing
 
         display.show(splash)  # print to screen
+
+    if buttonT == False:  # if the button is pressed to start the timer
+        if timerStarted == False:
+            start = monotonic()
+
