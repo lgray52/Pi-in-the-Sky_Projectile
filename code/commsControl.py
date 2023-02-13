@@ -24,20 +24,13 @@ i2c = busio.I2C(sclPin, sdaPin)
 display_bus = displayio.I2CDisplay(i2c, device_address = 0x3d, reset = board.GP5)  # set up oled screen - device address from test code
 display = adafruit_displayio_ssd1306.SSD1306(display_bus, width=128, height=64)
 
-'''timer setup'''
-import digitalio
-buttonT = digitalio.DigitalInOut(board.GP14)
-buttonT.pull = digitalio.Pull.UP  # wire one leg to pin 14 ad the other to GROUND)
-
 # set up OLED screen on a different i2c
 
 '''general'''
-from time import sleep, monotonic
+from time import sleep
 from projectileLib import getMessage
 
-messageStarted = False  # wait for a message to start
 alreadyPressed = False  # wait for button to be pressed
-timerStarted = False
 
 while True:
     splash = displayio.Group()
@@ -85,7 +78,29 @@ while True:
 
         display.show(splash)  # print to screen
 
-    if buttonT == False:  # if the button is pressed to start the timer
-        if timerStarted == False:
-            start = monotonic()
+    """Receive time of flight"""
+    if getMessage(uart) == "Sending time of flight...": 
+        waitForTOF = True
+    else:
+        waitForTOF = False
+    
+    if waitForTOF:  
+        uart.write(bytes(f"Ready for time"))  # when prep message received, send ready message
+        waitForTOF = False
+        byte2_read = uart.read(1)
 
+        while byte2_read == None:  # read bytes until it gets a message that isn't empty
+            byte2_read = uart.read(1)
+        
+        tof = getMessage(uart)  # tof stands for time of flight
+
+        while tof == 0:  # store the message and make sure it isn't bypassing the loop
+            tof = getMessage(uart)
+        
+        tofStr = f"Total time of flight: {tof}"
+        print(tofStr)
+
+        tofLine = label.Label(FONT, text = tofStr, color = 0xFFFF00, x = 5, y = 15)
+        splash.append(tofLine)  # add maximum value to what the screen is showing
+
+        display.show(splash)  # print to screen
