@@ -18,13 +18,14 @@ while True:
     accel = findMag(mpu.acceleration)  # magnitude of acceleration
     # print(accel)
 
-    if abs(accel) < 1 and launched == False:
+    if abs(accel) < 1 and launched == False:  # when projectile enters freefall
         launchTime = monotonic()
         print(launchTime)
         launched = True
 
-    if abs(accel) > 11 and launched == True:
+    if abs(accel) > 11 and launched == True:  # when it experiences an acceleration from hitting the ground
         stopTime = monotonic()
+        print(accel)
         totalTime =  stopTime - launchTime
         print(f"Total time of flight: {totalTime}")
         launched = False
