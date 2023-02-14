@@ -39,10 +39,10 @@ while True:
         times = []
         while message == "Start" or message == 0: 
             message = getMessage(uart)  # check constantly for message?
-            # # print(message)
-            # alt = altimeter.altitude  # pull the current altitude
-            # abvG = alt - groundLevel  # above ground height is the difference between altitude and ground level
-            # alts.append(abvG)  # accumulate a list of all the altitudes recorded by the altimeter
+            # print(message)
+            alt = altimeter.altitude  # pull the current altitude
+            abvG = alt - groundLevel  # above ground height is the difference between altitude and ground level
+            alts.append(abvG)  # accumulate a list of all the altitudes recorded by the altimeter
 
             accel = findMag(mpu.acceleration)  # magnitude of acceleration
             print(accel)
@@ -55,7 +55,7 @@ while True:
             if abs(accel) > 11 and launched == True:  # when it experiences an acceleration from hitting the ground
                 stopTime = monotonic()  # record the time it hit the ground
                 print(accel)
-                totalTime =  stopTime - launchTime  # find time between start and stop - tof
+                totalTime =  round((stopTime - launchTime), 4)  # find time between start and stop - tof, and round to 4 dec
                 times.append(totalTime)
 
                 if len(times) > 1:  # in case mutiple values are found take the longest time - should avoid bounce activations
@@ -73,27 +73,14 @@ while True:
         # print(alts)
 
         altsFinal = np.array(alts)  # make altitudes into a numpy array so it can be used
-        max = findMax(altsFinal)  # take maxmimum value and print
+        max = round(findMax(altsFinal), 4)  # take maxmimum value, round to 4 decimals, and print
         print(f"Max height: {max}")
-
-
-        # """send max height to control box"""
-        # uart.write(bytes(f"Sending max height...", "ascii"))  # send sender a message to prepare to receive max height
-        # message = getMessage(uart)
-
-        # while message == 0:  # wait until message is sent back over that sender is ready to receive
-        #     message = getMessage(uart)  # continue to check message
-
-        # if message == "Ready for max height":  # when confirmation is received, send max height
-        #     uart.write(bytes(f" {str(max)}", "ascii"))  # need to add one space before message so that it can read that a byte is sent before getting the whole message
-        
-        # sleep(1)  # pause for a second to let max height finish sending
 
         """send data to control box"""
         uart.write(bytes(f"Sending data...", "ascii"))
         # print("Sending time of flight")
         message = getMessage(uart)
-        print(message)
+        # print(message)
 
         while message == 0:  # keep checking for message
             message = getMessage(uart)
@@ -103,7 +90,7 @@ while True:
             uart.write(bytes(f" {str(max)}", "ascii"))  # need to add one space before message so that it can read that a byte is sent before getting the whole message
 
         message = getMessage(uart)  # kepep checking for message
-        print(message)
+        # print(message)
 
         while message == 0:
             message = getMessage(uart)

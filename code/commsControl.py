@@ -48,66 +48,6 @@ while True:
             sleep(1)
             alreadyPressed = False
 
-    # if getMessage(uart) == "Sending max height...":  # wait for message which tells sender to prepare to receieve max height
-    #     waitForMax = True
-    # else:
-    #     waitForMax = False
-
-    # if waitForMax:  # tell receiever the sender is ready
-    #     uart.write(bytes(f"Ready for max height", "ascii"))
-    #     waitForMax = False
-
-    #     byte_read = uart.read(1)
-
-    #     while byte_read == None:  # read one byte at a time until it gets a message which isn't None
-    #         byte_read = uart.read(1)
-    #         # print(byte_read)
-
-    #     maxHeight = getMessage(uart)  # read the message after the first detected byte
-
-    #     while maxHeight == 0:  # max height almost certainly should not be zero - correct transmission skip
-    #         maxHeight = getMessage(uart)
-    #         # print(maxHeight)
-
-    #     maxStr = f"Max height: {maxHeight}m"  # set as var to pass to serial and the oled screen
-    #     print(maxStr)
-
-    #     # print to oled screen
-    #     maxLine = label.Label(FONT, text = maxStr, color = 0xFFFF00, x = 5, y = 5)  # format title line; set text to start at screen coordinate (5,5)
-    #     splash.append(maxLine)  # add maximum value to what the screen is showing
-
-    #     display.show(splash)  # print to screen
-
-    # """Receive time of flight"""
-    # if getMessage(uart) == "Sending time of flight...":
-    #     print("got to here")
-    #     waitForTOF = True
-    # else:
-    #     waitForTOF = False
-    
-    # if waitForTOF:  
-    #     uart.write(bytes(f"Ready for time", "ascii"))  # when prep message received, send ready message
-    #     waitForTOF = False
-    #     byte2_read = uart.read(1)
-
-    #     while byte2_read == None:  # read bytes until it gets a message that isn't empty
-    #         byte2_read = uart.read(1)
-        
-    #     tof = getMessage(uart)  # tof stands for time of flight
-
-    #     while tof == 0:  # store the message and make sure it isn't bypassing the loop
-    #         tof = getMessage(uart)
-        
-    #     tofStr = f"Total time: {tof}s"
-    #     print(tofStr)
-
-    #     tofLine = label.Label(FONT, text = tofStr, color = 0xFFFF00, x = 5, y = 15)
-    #     splash.append(tofLine)  # add maximum value to what the screen is showing
-
-    #     display.show(splash)  # print to screen
-
-
-
     if getMessage(uart) == "Sending data...":  # wait for message which tells sender to prepare to receieve max height
         waitForData = True
     else:
@@ -143,7 +83,7 @@ while True:
         
         tof = getMessage(uart)
 
-        while tof == 0:
+        while tof == 0:  # same strategy as above
             tof = getMessage(uart)
             # print(tof)
         
