@@ -61,7 +61,7 @@ I expect this project will require:
 
 The primary challenge is to fit all of the electrical components into a sphere the size of a tennis ball and keep everything under the 181g weight limit while designing it to be structurally sound enough to survive repeated impacts. In the design process, I decided to make a dual-layer design with squishy TPU on the outside and rigid PLA on the inside. This way, the impact stress will be absorbed by the outer layer while the electronic components on the inside will not be squished or smashed against one another. To fit the circuit boards in, I created flat faces perdendicular to the direction the Pico will be suspended to allow all the components to fit in properly. There will also be room for a powerboost and internal padding.
 
-<b> CAD Design </b>
+<b> Projectile </b>
 
 <img src="images/cad1.png" height="300"> <img src="images/cad2.png" height="300"> <img src="images/cad3.png" height="300"> <img src="images/cad4.png" height="300">
 
@@ -190,6 +190,6 @@ Upon talking with Mr. Manning, I decided to include a timing function. My initia
 
 
 ### Sending the time of flight to the board
-
+The last obstacle I had was combining the time of flight code into the main projectile code and sending it to the control box. When I combined the time of flight code into the code which collected altimeter values, I noticed that the acceleration values collected much slower than when the acceleration code is isolated. I realised that this is because the altimeter values collect quite slowly to get more accurate values. With Mr. Miller's help, I found [the github for the mpl altimeter], and was able to adjust the speed with which the altimeter collects data
 
 [Back to Table of Contents](https://github.com/lgray52/Pi-in-the-Sky_Projectile/blob/main/README.md#table-of-contents)
