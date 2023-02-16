@@ -167,13 +167,16 @@ if waitForMax:  # tell receiever the sender is ready
     byte_read = uart.read(1)
 
     while byte_read == None:  
-        # read one byte at a time until it gets a message which isn't None
+        # read one byte at a time until it 
+        # gets a message which isn't None
         byte_read = uart.read(1)
 
-    maxHeight = getMessage(uart)  # read the message after the first detected byte
+    maxHeight = getMessage(uart)  
+    # read the message after the first detected byte
 
     while maxHeight == 0:  
-        # max height almost certainly should not be zero - correct transmission skip
+        # max height almost certainly should not be zero -
+        # correct transmission skip
         maxHeight = getMessage(uart)
 
     maxStr = f"Max height: {maxHeight}m"  
@@ -190,6 +193,98 @@ Upon talking with Mr. Manning, I decided to include a timing function. My initia
 
 
 ### Sending the time of flight to the board
-The last obstacle I had was combining the time of flight code into the main projectile code and sending it to the control box. When I combined the time of flight code into the code which collected altimeter values, I noticed that the acceleration values collected much slower than when the acceleration code is isolated. I realised that this is because the altimeter values collect quite slowly to get more accurate values. With Mr. Miller's help, I found [the github for the mpl altimeter], and was able to adjust the speed with which the altimeter collects data
+The last obstacle I had was combining the time of flight code into the main projectile code and sending it to the control box. When I combined the time of flight code into the code which collected altimeter values, I noticed that the acceleration values collected much slower than when the acceleration code is isolated. I realised that this is because the altimeter values collect quite slowly to get more accurate values. With Mr. Miller's help, I found [the github for the mpl altimeter](https://github.com/adafruit/Adafruit_CircuitPython_MPL3115A2/blob/main/adafruit_mpl3115a2.py), and was able to adjust the speed with which the altimeter collects data by modifying the collection rate in the library at line 150 in the github document. This done the acceleration collects a little faster, allowing me to test the combination of max height and time of flight tranmission. Sending the data was fairly straight forward, since I was able to modify the code I had already written to transmit the max height to include a section for the time of flight, as shown below.
+
+<table>
+<tr>
+<th align="center">
+<img width="441" height="1px">
+<p> 
+<small>
+PROJECTILE CODE
+</small>
+</p>
+</th>
+<th align="center">
+<img width="441" height="1px">
+<p> 
+<small>
+CONTROL BOX CODE
+</small>
+</p>
+</th>
+</tr>
+<tr>
+<td>
+
+```python
+"""send data to control box"""
+uart.write(bytes(f"Sending data...", "ascii"))
+message = getMessage(uart)
+
+while message == 0:  # keep checking for message
+    message = getMessage(uart)
+        
+# will send max cue first and then time
+if message == "Ready for max height": 
+    uart.write(bytes(f" {str(max)}", "ascii")) 
+
+message = getMessage(uart)
+
+while message == 0:  # keep checking for message
+    message = getMessage(uart)
+
+# send the time cue
+if message == "Ready for time":
+    uart.write(bytes(f" {str(totalTime)}", "ascii"))
+```
+  
+</td>
+<td>
+  
+```python
+if getMessage(uart) == "Sending data...":  
+    # wait for message which prompts to prepare for max height
+    waitForData = True
+else:
+    waitForData = False
+
+if waitForData:  # tell receiever the sender is ready
+    uart.write(bytes(f"Ready for max height", "ascii"))
+    waitForData = False
+
+    byte_read = uart.read(1)
+
+    while byte_read == None:  
+        # read one byte until it gets a message which isn't None
+        byte_read = uart.read(1)
+
+    maxHeight = getMessage(uart)  
+    # read the message after the first detected byte
+
+    while maxHeight == 0:  
+        # this corrects a transmission skip problem
+        maxHeight = getMessage(uart)
+    # record max height
+    maxStr = f"Max height: {maxHeight}m"
+
+    # Time of flight
+    uart.write(bytes(f"Ready for time", "ascii"))
+        
+    byte2_read = uart.read(1)
+
+    while byte2_read == None:  # same strategy as above
+        byte2_read = uart.read(1)
+        
+    tof = getMessage(uart)
+
+    while tof == 0:
+        tof = getMessage(uart)
+    # record time of flight
+    tofStr = f"Time: {tof}s"
+```
+</td>
+</tr>
+</table>
 
 [Back to Table of Contents](https://github.com/lgray52/Pi-in-the-Sky_Projectile/blob/main/README.md#table-of-contents)
