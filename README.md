@@ -87,7 +87,26 @@ The first big issue I had to address was starting the data collection sequence o
 
 ### Adapting reading message into function library
 
-One issue I had with the code above is that, while functional, the section which is able to retrieve a message is long and a little bit clunky since it's reading the message one byte at a time and stringing it together letter by letter. The purpose of doing this in the original code is to designate responses by the message type based on a one-letter key at the beginning of a message, a functionality which is not needed in my code. I decided to put the message-reading section in a function so I could use it repeatedly, but unfortunately the stringing the message together relies on a loop. A loop inside a function is a slippery slope to figure out since its easy to accidentally get stuck inside a loop within a function, so I decided to try a different approach by reading more bytes over the line. I found the very handy decode() method which turns bytes into a string which is the ideal output, allowing me to simplify the message-getting approach significantly. 
+One issue I had with the code above is that, while functional, the section which is able to retrieve a message is long and a little bit clunky since it's reading the message one byte at a time and stringing it together letter by letter. The purpose of doing this in the original code is to designate responses by the message type based on a one-letter key at the beginning of a message, a functionality which is not needed in my code. I decided to put the message-reading section in a function so I could use it repeatedly, but unfortunately the stringing the message together relies on a loop. A loop inside a function is a slippery slope to figure out since its easy to accidentally get stuck inside a loop within a function, so I decided to try a different approach by reading more bytes over the line. I found the very handy decode() method which turns bytes into a string which is the ideal output, allowing me to simplify the message-getting approach significantly. Here is the finished function:
+
+``` python
+from time import sleep
+
+def getMessage(uart):
+    message = 0
+
+    byte_read = uart.read(40)  # Read a bunch of bytes to make sure it gets the whole message
+    sleep(.2)  # make sure it has enough tine to read the whole message while not causing awkward delay
+
+    if not byte_read:  # Nothing read.
+        pass
+
+    if byte_read:
+        message = byte_read.decode()  # decode bytes into a string
+        print(f"Message received: {message}") 
+    
+    return message
+```
 
 
 ### Finding the maximum height values and eliminating outliers in the data
@@ -295,5 +314,12 @@ if waitForData:  # tell receiever the sender is ready
 </td>
 </tr>
 </table>
+
+### Final Code
+
+* [Library](https://github.com/lgray52/Pi-in-the-Sky_Projectile/blob/main/code/projectileLib.py)
+* [Code for control box](https://github.com/lgray52/Pi-in-the-Sky_Projectile/blob/main/code/commsControl.py)
+* [Code for projectile](https://github.com/lgray52/Pi-in-the-Sky_Projectile/blob/main/code/commsProjectile.py)
+
 
 [Back to Table of Contents](https://github.com/lgray52/Pi-in-the-Sky_Projectile/blob/main/README.md#table-of-contents)
