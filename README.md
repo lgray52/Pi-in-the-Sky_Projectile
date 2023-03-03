@@ -6,6 +6,7 @@ Lucy Gray Pi in the Sky Project Engineering 4
 * [Planning](https://github.com/lgray52/Pi-in-the-Sky_Projectile/blob/main/README.md#planning)
 * [CAD](https://github.com/lgray52/Pi-in-the-Sky_Projectile/blob/main/README.md#cad)
 * [Code](https://github.com/lgray52/Pi-in-the-Sky_Projectile/blob/main/README.md#code)
+* [Physical](https://github.com/lgray52/Pi-in-the-Sky_Projectile/blob/main/README.md#physical)
 
 ### Planning
 
@@ -67,13 +68,7 @@ The primary challenge for the projectile is to fit all of the electrical compone
 ### Control Box
 I also designed a control box to store the electronics which will be able to arm the projectile and print the returned launch data to a screen. The design of this box was simple, and my only real requirement was that it could be easily handheld and easy for Mr. Manning to use. For this reason, instructions will also be etched on the side of the box to make the usage of the control box crystal clear. 
 
-<b> CAD </b>
-
 <img src="images/control_box_1.png" height="300">   <img src="images/control_box_2.png" height="300">   <img src="images/control_box_3.png" height="300">
-
-<b> Real </b>
-
-<img src="images/real_box1.jpg" height="300"> <img src="images/real_box2.jpg" height="300">
 
 [Back to Table of Contents](https://github.com/lgray52/Pi-in-the-Sky_Projectile/blob/main/README.md#table-of-contents)
 
@@ -323,3 +318,9 @@ if waitForData:  # tell receiever the sender is ready
 
 
 [Back to Table of Contents](https://github.com/lgray52/Pi-in-the-Sky_Projectile/blob/main/README.md#table-of-contents)
+
+## Physical
+
+<b> Box </b>
+
+<img src="images/real_box1.jpg" height="300"> <img src="images/real_box2.jpg" height="300">
