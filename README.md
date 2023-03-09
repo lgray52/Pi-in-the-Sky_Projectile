@@ -340,4 +340,8 @@ The MPL altimeter is here represented by an MPU accelerometer - their wiring is 
 
 <img src="images/real_box1.jpg" height="300"> <img src="images/real_box2.jpg" height="300">
 
+<b> Projectile </b>
+
+<img src="images/projectile_real1.jpg" height="300"> <img src="images/projectile_real2.jpg" height="300"> <img src="images/projectile_real3.jpg" height="300">
+
 [Back to Table of Contents](https://github.com/lgray52/Pi-in-the-Sky_Projectile/blob/main/README.md#table-of-contents)
