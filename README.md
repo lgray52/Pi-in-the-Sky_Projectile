@@ -320,17 +320,36 @@ if waitForData:  # tell receiever the sender is ready
 
 Note: both will also have wires from the RX and TX pins from one to the other as well as a common ground.
 
-<b>Control Box:</b>
-
+<table>
+<tr>
+<th align="center">
+<img width="441" height="1px">
+<p> 
+CONTROL BOX
+</p>
+</th>
+<th align="center">
+<img width="441" height="1px">
+<p>
+PROJECTILE
+</p>
+</th>
+</tr>
+<tr>
+<td>
+ 
 <img src="images/ctrl_wiring-removebg-preview.png" height="400">
 
-Reset pin will be connected to GP5.
-
-<b>Projectile:</b>
+<sup><sub> Reset pin will be connected to GP5. </sub></sup>
+</td>
+<td>
 
 <img src="images/projectile_wiring-removebg-preview.png" height="400">
 
-The MPL altimeter is here represented by an MPU accelerometer - their wiring is the same.
+<sup><sub> The MPL altimeter is here represented by an MPU accelerometer - their wiring is the same. </sub></sup>
+</td>
+</tr>
+</table>
 
 [Back to Table of Contents](https://github.com/lgray52/Pi-in-the-Sky_Projectile/blob/main/README.md#table-of-contents)
 
