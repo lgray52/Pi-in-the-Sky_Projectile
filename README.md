@@ -66,7 +66,7 @@ The primary challenge for the projectile is to fit all of the electrical compone
 <img src="images/cad1.png" height="300"> <img src="images/cad2.png" height="300"> <img src="images/cad3.png" height="300"> <img src="images/cad4.png" height="300">
 
 ### Control Box
-I also designed a control box to store the electronics which will be able to arm the projectile and print the returned launch data to a screen. The design of this box was simple, and my only real requirement was that it could be easily handheld and easy for Mr. Manning to use. For this reason, instructions will also be etched on the side of the box to make the usage of the control box crystal clear. 
+I also designed a control box to store the electronics which will be able to arm the projectile and print the returned launch data to a screen. I added this aspect to my original design as a solution for the transmission of information from the projectile. The design of this box was simple, and my only real requirement was that it could be easily handheld and easy for Mr. Manning to use. For this reason, instructions will also be etched on the side of the box to make the usage of the control box crystal clear. 
 
 <img src="images/control_box_1.png" height="300">   <img src="images/control_box_2.png" height="300">   <img src="images/control_box_3.png" height="300">
 
@@ -74,6 +74,8 @@ I also designed a control box to store the electronics which will be able to arm
 
 ## Code
 *All code written in CircuitPython for Raspberry Pi Pico boards*
+
+[↓ Jump to final code and wiring ↓](https://github.com/lgray52/Pi-in-the-Sky_Projectile/blob/main/README.md#final-code)
 
 ### Starting the code
 
@@ -312,7 +314,7 @@ if waitForData:  # tell receiever the sender is ready
 
 ### Final Code
 
-* [Library](https://github.com/lgray52/Pi-in-the-Sky_Projectile/blob/main/code/projectileLib.py)
+* [Function library](https://github.com/lgray52/Pi-in-the-Sky_Projectile/blob/main/code/projectileLib.py)
 * [Code for control box](https://github.com/lgray52/Pi-in-the-Sky_Projectile/blob/main/code/commsControl.py)
 * [Code for projectile](https://github.com/lgray52/Pi-in-the-Sky_Projectile/blob/main/code/commsProjectile.py)
 
@@ -364,3 +366,5 @@ PROJECTILE
 <img src="images/projectile_real1.jpg" height="300"> <img src="images/projectile_real2.jpg" height="300"> <img src="images/projectile_real3.jpg" height="300">
 
 [Back to Table of Contents](https://github.com/lgray52/Pi-in-the-Sky_Projectile/blob/main/README.md#table-of-contents)
+
+The physical assembly of the projectile and control box have gone very smoothly. The only major assembly points were soldering the Pico for the control box onto my circuit board and soldering the components for the projectile to the projectile Pico. There is exactly enough space for the powerboost and a small lipo battery inside the projectile, and the shell held up very well with tabletop height drops. The thickness of the shell and the use of TPU for the outer shell lends it what I believe will be excellent survivability. The control box also came together well, although I did modify the design slightly the remove the on/off switch as the battery holder I found has its own. 
