@@ -1,5 +1,7 @@
 # type: ignore
 
+# NO LONGER UP TO DATE
+
 import adafruit_mpu6050 as imu
 import busio
 import board
