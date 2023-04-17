@@ -359,7 +359,7 @@ PROJECTILE
 
 <b> Box </b>
 
-<img src="images/real_box1.jpg" height="300"> <img src="images/real_box2.jpg" height="300">
+
 
 <b> Projectile </b>
 
