@@ -359,12 +359,12 @@ PROJECTILE
 
 <b> Box </b>
 
-
+<img src="images/realbox1.jpg" height="400"> <img src="images/realbox2.jpg" height="400">
 
 <b> Projectile </b>
 
 <img src="images/projectile_real1.jpg" height="300"> <img src="images/projectile_real2.jpg" height="300"> <img src="images/projectile_real3.jpg" height="300">
 
-The physical assembly of the projectile and control box have gone very smoothly. The only major assembly points were soldering the Pico for the control box onto my circuit board and soldering the components for the projectile to the projectile Pico. There is exactly enough space for the powerboost and a small lipo battery inside the projectile, and the shell held up very well with tabletop height drops. The thickness of the shell and the use of TPU for the outer shell lends it what I believe will be excellent survivability. The control box also came together well, although I did modify the design slightly the remove the on/off switch as the battery holder I found has its own. 
+The physical assembly of the projectile and control box have gone very smoothly. The only major assembly points were soldering the Pico for the control box onto my circuit board and soldering the components for the projectile to the projectile Pico. There is exactly enough space for the powerboost and a small lipo battery inside the projectile, and the shell held up very well with tabletop height drops. The thickness of the shell and the use of TPU for the outer shell lends it what I believe will be excellent survivability. The control box also came together well, although I did modify the design slightly from the original to remove the on/off switch as the battery holder I found has its own. 
 
 [Back to Table of Contents](https://github.com/lgray52/Pi-in-the-Sky_Projectile/blob/main/README.md#table-of-contents)
