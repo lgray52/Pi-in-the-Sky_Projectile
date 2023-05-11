@@ -37,8 +37,8 @@ while True:
         print("Starting data collection ...")
 
         times = []
-        while message == "Start" or message == 0: 
-            message = getMessage(uart)  # check constantly for message?
+        while message == "Start" or message == 0 or message == "": 
+            message = getMessage(uart)  # check constantly for message
             # print(message)
             alt = altimeter.altitude  # pull the current altitude
             abvG = alt - groundLevel  # above ground height is the difference between altitude and ground level
