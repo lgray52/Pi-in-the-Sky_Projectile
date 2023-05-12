@@ -60,15 +60,21 @@ I expect this project will require:
 
 ## CAD
 
+I used OnShape to model all parts.
+
 ### Projectile
-The primary challenge for the projectile is to fit all of the electrical components into a sphere the size of a tennis ball and keep everything under the 181g weight limit while designing it to be structurally sound enough to survive repeated impacts. In the design process, I decided to make a dual-layer design with squishy TPU on the outside and rigid PLA on the inside. This way, the impact stress will be absorbed by the outer layer while the electronic components on the inside will not be squished or smashed against one another. To fit the circuit boards in, I created flat faces perdendicular to the direction the Pico will be suspended to allow all the components to fit in properly. There will also be room for a powerboost and internal padding.
+The primary challenge for the projectile is to fit all of the electrical components into a sphere the size of a tennis ball and keep everything under the 181g weight limit while designing it to be structurally sound enough to survive repeated impacts. In the design process, I decided to 3D print a sphere using a dual-layer design with squishy TPU on the outside and rigid PLA on the inside. This way, the impact stress will be absorbed by the outer layer while the electronic components on the inside will not be squished or smashed against one another. To fit the circuit boards in, I created flat faces perdendicular to the direction the Pico will be suspended to allow all the components to fit in properly. There will also be room for a powerboost and internal padding.
 
 <img src="images/cad1.png" height="300"> <img src="images/cad2.png" height="300"> <img src="images/cad3.png" height="300"> <img src="images/cad4.png" height="300">
 
+*[Projectile CAD](https://cvilleschools.onshape.com/documents/8d3a5e693f3cf33ca7e5bdc1/w/83808f7c6e04da8df33e76c7/e/95c830c3264aed7347df3daa?renderMode=0&uiState=645e76d238eafd55bede0946)*
+
 ### Control Box
-I also designed a control box to store the electronics which will be able to arm the projectile and print the returned launch data to a screen. I added this aspect to my original design as a solution for the transmission of information from the projectile. The design of this box was simple, and my only real requirement was that it could be easily handheld and easy for Mr. Manning to use. For this reason, instructions will also be etched on the side of the box to make the usage of the control box crystal clear. 
+I also designed a control box to store the electronics which will be able to arm the projectile and print the returned launch data to a screen. I added this aspect to my original design as a solution for the transmission of information from the projectile. The design of this box was simple, and my only real requirement was that it could be easily handheld and easy for Mr. Manning to use. For this reason, instructions will also be etched on the side of the box to make the usage of the control box crystal clear. I made the control box to be cut out of acrylic with the laser cutter.
 
 <img src="images/control_box_1.png" height="300">   <img src="images/control_box_2.png" height="300">   <img src="images/control_box_3.png" height="300">
+
+*[Control Box CAD](https://cvilleschools.onshape.com/documents/8d3a5e693f3cf33ca7e5bdc1/w/83808f7c6e04da8df33e76c7/e/e94914d4094986ac800e3476?configuration=List_tYLpmbiOPNIlMj%3DDefault&renderMode=0&uiState=645e76f938eafd55bede0a2a)*
 
 [Back to Table of Contents](https://github.com/lgray52/Pi-in-the-Sky_Projectile/blob/main/README.md#table-of-contents)
 
