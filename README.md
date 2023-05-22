@@ -390,3 +390,12 @@ I ended up using...
 * Custom soldered circuit boards to mount electronics on
 
 [Back to Table of Contents](https://github.com/lgray52/Pi-in-the-Sky_Projectile/blob/main/README.md#table-of-contents)
+
+### Issues
+<b> Message error</b>
+
+The main issue I ended up running into was a strange error in the transmission. When I unplugged the projectile from the box, it turned out that the projectile was receiving a completely blank message. It took me a while to figure out what was going wrong - my first thought was that touching the wires was throwing the transmission off. However, the problem persisted even when I got a system working to plug the projectile to the box with headers, so the problem was not actually touching the wires. As it turned out, unplugging the two Picos was throwing the projectile's board an unreadable byte sequence. Because it couldn't translate it, the message it was throwing the board was neither nothing nor zero, the two things that the code was looking for to keep collecting data. I was able to filter out these unredable bytes in the data collection section, and so far that has worked quite well.
+
+<b> First Test "Launches" </b>
+
+Once I was able to get the minor issues out of the way, I was able to do a couple test "launches" in the lab. By throwing the projectile up, I was able to get data and send it to the control box. It printed properly, so I hope I will be able to launch from the trebuchet very soon!
