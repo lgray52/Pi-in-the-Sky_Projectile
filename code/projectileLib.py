@@ -34,13 +34,18 @@ def getMessage(uart):
     message = 0
 
     byte_read = uart.read(40)  # Read a bunch of bytes to make sure it gets the whole message
+    # print(byte_read)
     sleep(.2)  # make sure it has enough tine to read the whole message while not causing awkward delay
 
     if not byte_read:
         # Nothing read.
         pass
 
-    if byte_read:
+    if byte_read == b'\x00' or byte_read == b'\x00\x00' or byte_read == b'\x00\x00\x00':
+        # unplug error
+        pass
+
+    if byte_read and byte_read != b'\x00' and byte_read != b'\x00\x00' and byte_read != b'\x00\x00\x00':
         message = byte_read.decode()  # decode bytes into a string
         # print(message)
         print(f"Message received: {message}") 
