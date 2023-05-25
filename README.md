@@ -389,12 +389,12 @@ I ended up using...
 * Wires
 * Custom soldered circuit boards to mount electronics on
 
-[Back to Table of Contents](https://github.com/lgray52/Pi-in-the-Sky_Projectile/blob/main/README.md#table-of-contents)
-
 ### Issues
 <b> Message error</b>
 
 The main issue I ended up running into was a strange error in the transmission. When I unplugged the projectile from the box, it turned out that the projectile was receiving a completely blank message. It took me a while to figure out what was going wrong - my first thought was that touching the wires was throwing the transmission off. However, the problem persisted even when I got a system working to plug the projectile to the box with headers, so the problem was not actually touching the wires. As it turned out, unplugging the two Picos was throwing the projectile's board an unreadable byte sequence. Because it couldn't translate it, the message it was throwing the board was neither nothing nor zero, the two things that the code was looking for to keep collecting data. I was able to filter out these unredable bytes in the message receiving function, and so far that has worked quite well.
+
+<b> Altimeter Drift</b>
 
 <b> First Test "Launches" </b>
 
