@@ -402,9 +402,9 @@ I also ended up encountering a very strange error where even if the projectile w
 
 Once I was able to get the minor issues out of the way, I was able to do a couple test "launches" in the lab. By throwing the projectile up, I was able to get data and send it to the control box. It printed properly, so I hope I will be able to launch from the trebuchet very soon!
 
-<b> Working projectile and data reading</b>
+### Working projectile and data reading
 
-<img src="images/projectile.gif" height="300">
+<img src="images/projectile.gif" height="400">
 
 Unfortunately this video was taken after the altimeter drift started affecting my max height values but the whole system is working except for the erroneous maximum height reading. Overall, I'm pleased with the final product and proud that I was able to accomplish quite a complicated system in just a little over a semester (despite intense senioritis). 
 
