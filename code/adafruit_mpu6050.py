@@ -210,7 +210,7 @@ class MPU6050:
         self.reset()
 
         self._sample_rate_divisor = 0
-        self._filter_bandwidth = Bandwidth.BAND_184_HZ
+        self._filter_bandwidth = Bandwidth.BAND_260_HZ
         self._gyro_range = GyroRange.RANGE_500_DPS
         self._accel_range = Range.RANGE_2_G
         sleep(0.100)

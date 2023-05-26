@@ -45,7 +45,7 @@ while True:
             alts.append(abvG)  # accumulate a list of all the altitudes recorded by the altimeter
 
             accel = findMag(mpu.acceleration)  # magnitude of acceleration
-            print(accel)
+            # print(accel)
 
             if abs(accel) < 3 and launched == False:  # when projectile enters freefall
                 launchTime = monotonic()  # record the time it launched
@@ -70,7 +70,8 @@ while True:
         # Stop collecting data
         print("Ending data collection")
         print(f"time of flight: {totalTime}")
-        # print(alts)
+        
+        print(alts)
 
         altsFinal = np.array(alts)  # make altitudes into a numpy array so it can be used
         max = round(findMax(altsFinal), 4)  # take maxmimum value, round to 4 decimals, and print
