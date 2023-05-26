@@ -396,8 +396,16 @@ The main issue I ended up running into was a strange error in the transmission. 
 
 <b> Altimeter Drift</b>
 
+I also ended up encountering a very strange error where even if the projectile was left in the same spot, the reading from the altimeter was dropping by about a meter a minute. This was also experienced by a couple other groups - because my code has remained the same and it was not an issue before, it seems like I would need to find a new altimeter to fix the problem, and I'm not willing to solder a new one on at this point. However pretty much everything else is working since I switched out the battery that caused the board do wipe its own processing system whenever the battery was unplugged. 
+
 <b> First Test "Launches" </b>
 
 Once I was able to get the minor issues out of the way, I was able to do a couple test "launches" in the lab. By throwing the projectile up, I was able to get data and send it to the control box. It printed properly, so I hope I will be able to launch from the trebuchet very soon!
+
+<b> Working projectile and data reading</b>
+
+<img src="images/projectile.gif" height="300">
+
+Unfortunately this video was taken after the altimeter drift started affecting my max height values but the whole system is working except for the erroneous maximum height reading. Overall, I'm pleased with the final product and proud that I was able to accomplish quite a complicated system in just a little over a semester (despite intense senioritis). 
 
 [Back to Table of Contents](https://github.com/lgray52/Pi-in-the-Sky_Projectile/blob/main/README.md#table-of-contents)
